@@ -33,7 +33,7 @@ app.use('/DaClub', DaClubRoutes);
 //
 
 DaClubRoutes.route('/user').get(function(req, res) {
-    Utilisateurs.find(req.query, function(err, useur){
+    Users.find(req.query, function(err, user){
         if (err) {
             console.log(err)
         } else {
@@ -44,7 +44,7 @@ DaClubRoutes.route('/user').get(function(req, res) {
 
 DaClubRoutes.route('/user').post(function(req, res) {
     if(req.query._id === null || req.query._id === undefined){
-        let user = new user(req.body);
+        let user = new Users(req.body);
         user.save()
             .then(user => {
                 res.status(200).json({'user': 'Utilisateurs added successfully'});
@@ -54,14 +54,14 @@ DaClubRoutes.route('/user').post(function(req, res) {
             });
     }
     else
-    user.findById(req.query._id, function(err, user) {
+    Users.findById(req.query._id, function(err, user) {
             if (!user)
                 res.status(404).send("data is not found");
             else
             user.Nom = req.body.Nom;
-            user.Code = req.body.Code;
             user.Prenom = req.body.Prenom;
-            user.Rang = req.body.Rang;
+            user.coordX = req.body.coordX;
+            user.coordY = req.body.coordY;
             
     
             user.save().then(user => {

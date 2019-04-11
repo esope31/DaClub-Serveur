@@ -6,6 +6,8 @@ let Users = new Schema({
     
     Nom: String,
     Prenom: String,
+    coordX:String,
+    coordY:String,
  
 });
 
